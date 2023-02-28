@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     let imagesManager = new Manager('images');
-    
+
     imagesManager.getAllOnce((snapshot => {
       let data = snapshot.val();
       let images = Object.keys(data).map(key => ({
@@ -55,6 +55,8 @@ function App() {
       case 'hard':
         nbOfCards = 16;
         break;
+      default:
+        throw new Error('This difficulty does not exist');
     }
 
     let cards = images.slice(0, nbOfCards);
@@ -67,7 +69,7 @@ function App() {
   };
 
   const selectCard = (card) => {
-    
+
     if (correctCardsId.includes(card.id)) return;
 
     // if the selected card is an already fliped one
@@ -109,7 +111,7 @@ function App() {
       setWin(true);
       clearInterval(intervalId);
     }
-  }, [correctCardsId]);
+  }, [correctCardsId, intervalId, cards.length]);
 
   const getTime = (time) => {
     let seconds = time % 60;
@@ -117,7 +119,7 @@ function App() {
 
     if (String(seconds).length < 2) seconds = '0' + seconds;
     if (String(minutes).length < 2) minutes = '0' + minutes;
-    
+
     return `${minutes} : ${seconds}`;
   };
 
