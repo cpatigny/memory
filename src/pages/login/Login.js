@@ -20,7 +20,7 @@ const Login = () => {
     const { name, value } = e.target;
     setLoginFormData({ ...loginFormData, [name]: value });
   };
-  
+
   const handleSignIn = e => {
     e.preventDefault();
     const { email, password } = loginFormData;
@@ -36,7 +36,7 @@ const Login = () => {
   };
 
   // if user already sign in
-  if (typeof user === 'object') return <Navigate to='/' />;
+  if (typeof user === 'object') return <Navigate to='/admin' />;
 
   return (
     <div className='login'>
